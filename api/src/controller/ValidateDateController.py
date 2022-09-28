@@ -7,8 +7,8 @@ from dto import DateDto
     url = '/callendar/date/validate',
     tag = 'Validate Date',
     description = 'Validate Date controller'
-    , logRequest = True
-    , logResponse = True
+    # , logRequest = True
+    # , logResponse = True
 )
 class ValidateDateController:
 
