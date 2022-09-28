@@ -16,8 +16,8 @@ class DateController:
         url = '/<string:date>',
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         responseClass=[DateDto.DateResponseDto]
-        , logRequest = True
-        , logResponse = True
+        # , logRequest = True
+        # , logResponse = True
     )
     def get(self, date=None):
         return self.service.date.findByKey(date), HttpStatus.OK
@@ -27,8 +27,8 @@ class DateController:
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestClass=[DateDto.DateRequestDto],
         responseClass=[DateDto.DateResponseDto]
-        , logRequest = True
-        , logResponse = True
+        # , logRequest = True
+        # , logResponse = True
     )
     def put(self, dto):
         return self.service.date.update(dto), HttpStatus.ACCEPTED
@@ -46,8 +46,8 @@ class DateAllController:
     @ControllerMethod(
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         responseClass=[[DateDto.DateResponseDto]]
-        , logRequest = True
-        , logResponse = True
+        # , logRequest = True
+        # , logResponse = True
     )
     def get(self):
         return self.service.date.findAll(), HttpStatus.OK
@@ -66,8 +66,8 @@ class DateBulkController:
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestParamClass=[DateDto.CalendarDateParamsDto],
         responseClass=[[DateDto.DateResponseDto]]
-        , logRequest = True
-        , logResponse = True
+        # , logRequest = True
+        # , logResponse = True
     )
     def get(self, params=None):
         return self.service.date.findAllByCalendarParams(params), HttpStatus.OK
@@ -76,8 +76,8 @@ class DateBulkController:
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestParamClass=[DateDto.CalendarDateParamsDto],
         responseClass=[[DateDto.DateResponseDto]]
-        , logRequest = True
-        , logResponse = True
+        # , logRequest = True
+        # , logResponse = True
     )
     def post(self, params=None):
         return self.service.date.createCalendarByYear(params), HttpStatus.CREATED
