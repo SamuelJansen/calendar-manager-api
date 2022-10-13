@@ -52,15 +52,7 @@ class DateService:
     @ServiceMethod(requestClass=[str])
     def findByKey(self, keyAsString):
         key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=keyAsString))
-        model = self.findModelByKey(key)
-        # print(model)
-        # print(model.type)
-        # print(type(model.type))
-        DateDto.DateResponseDto(key=model.key, type=model.type)
-        # print('here')
-        resp = self.mapper.date.fromModelToResponseDto(model)
-        # print(resp)
-        return self.mapper.date.fromModelToResponseDto(model)
+        return self.mapper.date.fromModelToResponseDto(self.findModelByKey(key))
 
 
     @ServiceMethod(requestClass=[datetime.date])
