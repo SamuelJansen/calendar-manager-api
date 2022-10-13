@@ -1,14 +1,14 @@
 from python_framework import SqlAlchemyProxy as sap
 from python_framework import Repository
 
-from model import Date
+from model import DateModel
 
 
-@Repository(model = Date.Date)
+@Repository(model = DateModel.DateModel)
 class DateRepository:
 
     def load(self, load):
-        return self.repository.onChange(load)
+        return self.repository.reload(load)
 
     def save(self, model):
         return self.repository.saveAndCommit(model)

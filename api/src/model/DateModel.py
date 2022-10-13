@@ -7,7 +7,7 @@ from constant import DateConstant
 from enumeration.DateType import DateType
 
 
-class Date(MODEL):
+class DateModel(MODEL):
     __tablename__ = DATE
 
     id = sap.Column(sap.Integer(), sap.Sequence(f'{__tablename__}{sap.ID}{sap.SEQ}'), primary_key=True)
@@ -23,15 +23,13 @@ class Date(MODEL):
         self.id = id
         self.key = key
         self.type = type
+        self.setDefaultValues()
 
-    def __onChange__(self, *args, **kwargs):
+
+    def setDefaultValues(self, *args, **kwargs):
         self.key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=self.key))
         self.type = ConverterStatic.getValueOrDefault(DateType.map(self.type), DateConstant.DEFAULT_TYPE)
         return self
-
-    def onChange(self, *args, **kwargs):
-        return self.__onChange__(*args, **kwargs)
-
 
 
     def __repr__(self):

@@ -1,5 +1,5 @@
 from python_helper import DateTimeHelper
-from python_framework import ConverterStatic
+from python_framework import StaticConverter
 
 from constant import DateConstant
 from enumeration.DateType import DateType
@@ -13,7 +13,7 @@ class DateRequestDto:
     ):
         self.id = id
         self.key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=key))
-        self.type = ConverterStatic.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)
+        self.type = StaticConverter.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)
 
 
 class DateResponseDto:
@@ -24,7 +24,7 @@ class DateResponseDto:
     ):
         self.id = id
         self.key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=key))
-        self.type = ConverterStatic.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)
+        self.type = StaticConverter.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)
 
 
 class CalendarDateParamsDto:
@@ -40,4 +40,4 @@ class ValidateDateParamsDto:
         type = None
     ):
         self.date = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=date))
-        self.type = ConverterStatic.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)
+        self.type = StaticConverter.getValueOrDefault(DateType.map(type), DateConstant.DEFAULT_TYPE)

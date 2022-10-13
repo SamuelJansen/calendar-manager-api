@@ -3,7 +3,7 @@ from python_helper import DateTimeHelper, ObjectHelper
 from python_framework import Service, ServiceMethod
 
 from dto import DateDto
-from model import Date
+from model import DateModel
 
 
 @Service()
@@ -52,7 +52,15 @@ class DateService:
     @ServiceMethod(requestClass=[str])
     def findByKey(self, keyAsString):
         key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=keyAsString))
-        return self.mapper.date.fromModelToResponseDto(self.findModelByKey(key))
+        model = self.findModelByKey(key)
+        # print(model)
+        # print(model.type)
+        # print(type(model.type))
+        DateDto.DateResponseDto(key=model.key, type=model.type)
+        # print('here')
+        resp = self.mapper.date.fromModelToResponseDto(model)
+        # print(resp)
+        return self.mapper.date.fromModelToResponseDto(model)
 
 
     @ServiceMethod(requestClass=[datetime.date])
@@ -65,11 +73,11 @@ class DateService:
         return self.repository.date.findById(id)
 
 
-    @ServiceMethod(requestClass=[Date.Date])
+    @ServiceMethod(requestClass=[DateModel.DateModel])
     def saveModel(self, model):
         return self.repository.date.save(model)
 
 
-    @ServiceMethod(requestClass=[[Date.Date]])
+    @ServiceMethod(requestClass=[[DateModel.DateModel]])
     def saveAllModel(self, modelList):
         return self.repository.date.saveAll(modelList)
