@@ -23,7 +23,7 @@ class DateService:
 
     @ServiceMethod(requestClass=[DateDto.DateRequestDto])
     def update(self, dto):
-        model = self.findByKey(dto.key)
+        model = self.findModelByKey(dto.key)
         if ObjectHelper.isNone(model):
             model = self.findById(dto.id)
         self.mapper.date.overrideModel(dto, model)
@@ -49,8 +49,14 @@ class DateService:
         self.validator.date.validateTypeByDate(paramsDto.date, paramsDto.type)
 
 
+    @ServiceMethod(requestClass=[str])
+    def findByKey(self, keyAsString):
+        key = DateTimeHelper.dateOf(dateTime=DateTimeHelper.of(date=keyAsString))
+        return self.mapper.date.fromModelToResponseDto(self.findModelByKey(key))
+
+
     @ServiceMethod(requestClass=[datetime.date])
-    def findByKey(self, key):
+    def findModelByKey(self, key):
         return self.repository.date.findByKey(key)
 
 
