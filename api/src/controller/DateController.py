@@ -35,7 +35,7 @@ class DateController:
 
 
 @Controller(
-    url = '/callendar/date/all',
+    url = '/callendar/date',
     tag = 'Date',
     description = 'Date controller'
     , logRequest = True
@@ -44,6 +44,7 @@ class DateController:
 class DateAllController:
 
     @ControllerMethod(
+        url = '/all',
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         responseClass=[[DateDto.DateResponseDto]]
         # , logRequest = True
@@ -63,6 +64,7 @@ class DateAllController:
 class DateBulkController:
 
     @ControllerMethod(
+        url = '/bulk',
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestParamClass=[DateDto.CalendarDateParamsDto],
         responseClass=[[DateDto.DateResponseDto]]
@@ -73,6 +75,7 @@ class DateBulkController:
         return self.service.date.findAllByCalendarParams(params), HttpStatus.OK
 
     @ControllerMethod(
+        url = '/bulk',
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestParamClass=[DateDto.CalendarDateParamsDto],
         responseClass=[[DateDto.DateResponseDto]]
