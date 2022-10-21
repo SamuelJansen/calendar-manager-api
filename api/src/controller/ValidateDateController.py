@@ -4,7 +4,7 @@ from python_framework import Controller, ControllerMethod, HttpStatus
 from dto import DateDto
 
 @Controller(
-    url = '/callendar/date/validate',
+    url = '/callendar/date',
     tag = 'Validate Date',
     description = 'Validate Date controller'
     # , logRequest = True
@@ -13,6 +13,7 @@ from dto import DateDto
 class ValidateDateController:
 
     @ControllerMethod(
+        url = '/validate',
         # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
         requestParamClass=[DateDto.ValidateDateParamsDto]
         # , logRequest = True
