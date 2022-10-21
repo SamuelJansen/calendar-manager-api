@@ -16,7 +16,8 @@ class DateService:
         return self.mapper.date.fromModelListToResponseDtoList(
             self.saveAllModel([
                 self.mapper.date.buildNewModelByDate(DateTimeHelper.dateOf(dateTime=DateTimeHelper.plusDays(firstDateOfTheYear, days=days)))
-                for days in range((lastDateOfTheYear - firstDateOfTheYear).days)
+                for days in range((lastDateOfTheYear - firstDateOfTheYear).days + 1)
+                if not self.existsByKey(DateTimeHelper.dateOf(dateTime=DateTimeHelper.plusDays(firstDateOfTheYear, days=days)))
             ])
         )
 
@@ -73,3 +74,8 @@ class DateService:
     @ServiceMethod(requestClass=[[DateModel.DateModel]])
     def saveAllModel(self, modelList):
         return self.repository.date.saveAll(modelList)
+
+
+    @ServiceMethod(requestClass=[datetime.date])
+    def existsByKey(self, key):
+        return self.repository.date.existsByKey(key)
