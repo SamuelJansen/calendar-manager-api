@@ -7,9 +7,6 @@ from model import DateModel
 @Repository(model = DateModel.DateModel)
 class DateRepository:
 
-    def load(self, load):
-        return self.repository.reload(load)
-
     def save(self, model):
         return self.repository.saveAndCommit(model)
 
@@ -52,7 +49,7 @@ class DateRepository:
     def findAllByTypeIn(self, typeList):
         modelList = self.repository.session.query(self.model).filter(self.model.type.in_(typeList)).all()
         self.repository.session.commit()
-        return self.load(modelList)
+        return self.repository.load(modelList)
 
     def findAllBetwenDates(self, firstDateOfTheYear, lastDateOfTheYear):
         modelList = self.repository.session.query(self.model).filter(
@@ -62,4 +59,4 @@ class DateRepository:
             )
         ).all()
         self.repository.session.commit()
-        return self.load(modelList)
+        return self.repository.load(modelList)
