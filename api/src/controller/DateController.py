@@ -84,3 +84,15 @@ class DateBulkController:
     )
     def post(self, params=None):
         return self.service.date.createCalendarByYear(params), HttpStatus.CREATED
+
+
+    @ControllerMethod(
+        url = '/bulk',
+        # apiKeyRequired=[ApiKeyContext.ADMIN, ApiKeyContext.API, ApiKeyContext.USER],
+        requestClass=[[DateDto.DateRequestDto]],
+        responseClass=[[DateDto.DateResponseDto]]
+        # , logRequest = True
+        # , logResponse = True
+    )
+    def put(self, dtoList):
+        return self.service.date.updateAll(dtoList), HttpStatus.ACCEPTED

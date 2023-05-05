@@ -31,6 +31,14 @@ class DateService:
         return self.mapper.date.fromModelToResponseDto(self.saveModel(model))
 
 
+    @ServiceMethod(requestClass=[[DateDto.DateRequestDto]])
+    def updateAll(self, dtoList):
+        return [
+            self.update(dto)
+            for dto in dtoList
+        ]
+
+
     @ServiceMethod(requestClass=[DateDto.CalendarDateParamsDto])
     def findAllByCalendarParams(self, paramsDto):
         firstDateOfTheYear = DateTimeHelper.of(date=f'{paramsDto.year}-01-01')
